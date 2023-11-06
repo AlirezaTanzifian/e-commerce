@@ -11,8 +11,8 @@
           <div>Product Filter</div>
           <ADivider class="!my-4" />
           <div class="flex gap-4">
-            <AInput />
-            <AButton class="bg-blue-500" type="primary">search</AButton>
+            <AInput v-model:value="input" type="text" />
+            <AButton class="bg-blue-500" type="primary" @click="nameFilter">search</AButton>
           </div>
           <ADivider class="!my-4" />
           <div class="flex flex-col">
@@ -36,6 +36,7 @@
 <script setup lang="ts">
 const products = ref([])
 const filterProducts = ref([])
+const input = ref<string>('')
 
 const categoryItem = [ 'men\'s clothing', 'jewelery', 'electronics', 'women\'s clothing' ]
 
@@ -54,6 +55,18 @@ const applyFilter = () => {
       filterProducts.value.push(item)
     }
   })
+}
+
+const nameFilter = () => {
+  filterProducts.value = []
+  products.value.forEach((item) => {
+    if (item.title.includes(input.value)) {
+      filterProducts.value.push(item)
+    }
+  })
+  if (filterProducts.value.length === 0) {
+    message.error('No product with this specification was found')
+  }
 }
 
 onMounted(async() => {
