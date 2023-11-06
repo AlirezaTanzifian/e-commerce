@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 border w-fit rounded-md flex flex-col gap-1 hover:shadow-[0_0px_30px_-15px_rgba(0,0,0,0.5)]">
+  <div class="p-2 border w-fit h-fit rounded-md flex flex-col gap-1 hover:shadow-[0_0px_30px_-15px_rgba(0,0,0,0.5)]">
     <img class="w-40 h-40" :src="props.data?.image" alt="product-image">
     <span>{{ shortTitle(props.data?.title) }}</span>
     <span>{{ `${props.data?.price} $` }}</span>

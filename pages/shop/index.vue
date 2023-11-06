@@ -26,6 +26,13 @@
           <ADivider class="!my-4" />
           <div class="flex flex-col">
             <div>Price</div>
+            <ARadioGroup v-model:value="radio">
+              <div class="flex flex-col mt-4">
+                <ARadio :value="1">Ascending</ARadio>
+                <ARadio :value="2">Descending</ARadio>
+                <ARadio :value="3">None</ARadio>
+              </div>
+            </ARadioGroup>
           </div>
         </div>
       </div>
@@ -37,14 +44,13 @@
 const products = ref([])
 const filterProducts = ref([])
 const input = ref<string>('')
+const radio = ref<number>(3)
 
 const categoryItem = [ 'men\'s clothing', 'jewelery', 'electronics', 'women\'s clothing' ]
 
 const selectedCategory = ref([])
-const selectedPrice= ref([])
 
-
-watch([selectedCategory, selectedPrice], async () => {
+watch(selectedCategory, async () => {
   await applyFilter()
 })
 
@@ -68,6 +74,25 @@ const nameFilter = () => {
     message.error('No product with this specification was found')
   }
 }
+
+watch(radio, () => {
+  filterProducts.value = []
+  filterProducts.value = [...products.value]
+  switch (radio.value) {
+    case 1:
+      filterProducts.value.sort((x, y) => x.price - y.price)
+      break
+    case 2:
+      filterProducts.value.sort((x, y) => y.price - x.price)
+      break
+    case 3:
+      filterProducts.value = products.value
+      break
+    default:
+      filterProducts.value = products.value
+      break
+  }
+})
 
 onMounted(async() => {
   const { data } = await useFetch('https://fakestoreapi.com/products')
