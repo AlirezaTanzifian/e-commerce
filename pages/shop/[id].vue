@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div class="mt-12 p-4 flex justify-center">
-      <div v-if="!product">Loading ...</div>
+      <div class="mt-32 text-lg font-bold" v-if="product.length == 0">Loading ...</div>
       <div class="border p-4 rounded-md flex flex-col md:flex-row md:items-center gap-4 w-[90%]" v-else>
         <img class="w-80" :src="product.image" alt="">
         <div class="md:border md:p-4 md:rounded-md flex flex-col gap-2 w-full h-fit">
