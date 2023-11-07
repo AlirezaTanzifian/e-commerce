@@ -2,7 +2,7 @@
   <div class="p-2 border w-fit h-fit rounded-md flex flex-col gap-1 hover:shadow-[0_0px_30px_-15px_rgba(0,0,0,0.5)]">
     <img class="w-40 h-40" :src="props.product?.image" alt="product-image">
     <span>{{ shortTitle(props.product?.title) }}</span>
-    <span>{{ `${props.product?.price} $` }}</span>
+    <span class="text-green-500 font-medium">{{ `${props.product?.price} $` }}</span>
     <div class="flex justify-between items-center mt-4">
       <NuxtLink :to="`/shop/${props.product?.id}`" class="text-sm font-medium text-blue-500">Detail</NuxtLink>
       <AButton size="small" @click="cartStore.addProduct(props.product, 1)" v-if="!isAddedProduct">
