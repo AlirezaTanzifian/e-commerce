@@ -9,12 +9,21 @@
         <router-link :to="item.key">{{ item.title }}</router-link>
       </AMenuItem>
     </AMenu>
-    <div>shop</div>
+    <div class="flex items-center">
+      <ABadge size="small" :count="cartStore.count">
+        <img src="~/assets/img/basket.svg" alt="basket-icon" @click="router.push('/basket')" >
+      </ABadge>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {useCartStore} from "~/store/cart";
+
 const selectedMenu = ref([])
+
+const cartStore = useCartStore()
+
 const menu = ref([
   {
     title: 'Home',
@@ -25,6 +34,8 @@ const menu = ref([
     key: 'shop'
   }
 ])
+
+const router = useRouter()
 
 </script>
 
